@@ -27,7 +27,12 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1"
+  },
+  "dependencies": {
+    "fastify": "^5.2.1",
+    "mongoose": "^8.12.1"
   }
 }

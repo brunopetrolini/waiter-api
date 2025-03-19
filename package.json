@@ -7,6 +7,9 @@
   "author": "Bruno Petrolini <brunopetrolini@hotmail.com>",
   "license": "MIT",
   "private": false,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/server.js",

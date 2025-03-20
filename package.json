@@ -22,6 +22,8 @@
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
+    "@types/express": "^5.0.1",
+    "@types/multer": "^1.4.12",
     "@types/node": "^22.13.10",
     "commitlint": "^19.8.0",
     "eslint": "^9.22.0",
@@ -37,8 +39,9 @@
     "typescript-eslint": "^8.26.1"
   },
   "dependencies": {
-    "fastify": "^5.2.1",
+    "express": "^4.21.2",
     "mongoose": "^8.12.1",
+    "multer": "^1.4.5-lts.2",
     "zod": "^3.24.2"
   }
 }

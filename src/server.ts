@@ -1,22 +1,22 @@
-import fastify, { FastifyPluginOptions } from 'fastify';
+import express from 'express';
 import mongoose from 'mongoose';
 
-import { categoriesRoutes, productsRoutes } from './routes';
+import { router } from './routes';
 
-const app = fastify({ logger: true });
+const app = express();
 
-const options: FastifyPluginOptions = { prefix: '/api' };
-app.register(categoriesRoutes, options);
-app.register(productsRoutes, options);
+app.use(express.json());
+app.use(router);
 
-const initServer = async () => {
-  try {
-    const port = Number(process.env.PORT) || 3000;
-    await app.listen({ port });
-  } catch (err) {
-    app.log.error(err);
-    process.exit(2);
-  }
+const initServer = () => {
+  const port = process.env.PORT || 3000;
+  app.listen(port, (err) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    console.info(`🚀 Server is running on port http://localhostt:${port}`);
+  });
 };
 
 mongoose

@@ -1,27 +1,25 @@
-import type { FastifyInstance } from 'fastify';
+import { Router } from 'express';
 
 import { CategoriesController, ProductsController } from './controllers';
 
-export function categoriesRoutes(app: FastifyInstance) {
-  const categoriesController = new CategoriesController();
+const router = Router();
 
-  app.get('/categories', (request, reply) =>
-    categoriesController.findAll(request, reply),
-  );
+/* Categories Routes */
+const categoriesController = new CategoriesController();
+router.get('/categories', (request, response) =>
+  categoriesController.findAll(request, response),
+);
+router.post('/categories', (request, response) =>
+  categoriesController.create(request, response),
+);
 
-  app.post('/categories', (request, reply) =>
-    categoriesController.create(request, reply),
-  );
-}
+/* Products Routes */
+const productsController = new ProductsController();
+router.get('/products', (request, response) =>
+  productsController.listAll(request, response),
+);
+router.post('/products', (request, response) =>
+  productsController.create(request, response),
+);
 
-export function productsRoutes(app: FastifyInstance) {
-  const productsController = new ProductsController();
-
-  app.get('/products', (request, reply) =>
-    productsController.listAll(request, reply),
-  );
-
-  app.post('/products', (request, reply) =>
-    productsController.create(request, reply),
-  );
-}
+export { router };

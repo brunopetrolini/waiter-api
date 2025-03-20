@@ -1,4 +1,4 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
+import type { Request, Response } from 'express';
 
 import { CategoriesRepository } from '@/repositories/categories-repository';
 
@@ -11,14 +11,14 @@ export class CategoriesController {
     this.categoriesRepository = new CategoriesRepository();
   }
 
-  async findAll(request: FastifyRequest, reply: FastifyReply) {
+  async findAll(request: Request, response: Response) {
     const categories = await this.categoriesRepository.findAll();
-    reply.send(categories);
+    response.json(categories);
   }
 
-  async create(request: FastifyRequest, reply: FastifyReply) {
+  async create(request: Request, response: Response) {
     const category = createCategorySchema.parse(request.body);
     const createdCategory = await this.categoriesRepository.create(category);
-    reply.code(201).send(createdCategory);
+    response.status(201).json(createdCategory);
   }
 }

@@ -1,6 +1,6 @@
 import type { FastifyInstance } from 'fastify';
 
-import { CategoriesController } from './controllers';
+import { CategoriesController, ProductsController } from './controllers';
 
 export function categoriesRoutes(app: FastifyInstance) {
   const categoriesController = new CategoriesController();
@@ -11,5 +11,13 @@ export function categoriesRoutes(app: FastifyInstance) {
 
   app.post('/categories', (request, reply) =>
     categoriesController.create(request, reply),
+  );
+}
+
+export function productsRoutes(app: FastifyInstance) {
+  const productsController = new ProductsController();
+
+  app.get('/products', (request, reply) =>
+    productsController.listAll(request, reply),
   );
 }

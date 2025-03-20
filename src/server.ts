@@ -1,11 +1,13 @@
-import fastify from 'fastify';
+import fastify, { FastifyPluginOptions } from 'fastify';
 import mongoose from 'mongoose';
 
-import { categoriesRoutes } from './routes';
+import { categoriesRoutes, productsRoutes } from './routes';
 
 const app = fastify({ logger: true });
 
-app.register(categoriesRoutes, { prefix: '/api' });
+const options: FastifyPluginOptions = { prefix: '/api' };
+app.register(categoriesRoutes, options);
+app.register(productsRoutes, options);
 
 const initServer = async () => {
   try {

@@ -32,7 +32,6 @@ const ingredientSchema = new Schema<Ingredient>(
   { _id: false },
 );
 
-// Schema para produto
 const productSchema = new Schema<Product>(
   {
     name: {
@@ -64,5 +63,4 @@ const productSchema = new Schema<Product>(
   { timestamps: true },
 );
 
-// Exportação do modelo
 export const ProductModel = model<Product>('Product', productSchema);

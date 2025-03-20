@@ -20,4 +20,8 @@ export function productsRoutes(app: FastifyInstance) {
   app.get('/products', (request, reply) =>
     productsController.listAll(request, reply),
   );
+
+  app.post('/products', (request, reply) =>
+    productsController.create(request, reply),
+  );
 }

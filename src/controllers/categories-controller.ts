@@ -11,7 +11,7 @@ export class CategoriesController {
     this.categoriesRepository = new CategoriesRepository();
   }
 
-  async findAll(request: Request, response: Response) {
+  async findAll(_request: Request, response: Response) {
     const categories = await this.categoriesRepository.findAll();
     response.json(categories);
   }

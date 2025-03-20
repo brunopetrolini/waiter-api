@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 
+import { Product } from '@/repositories/models';
 import { ProductsRepository } from '@/repositories/products-repository';
 
 export class ProductsController {
@@ -14,5 +15,10 @@ export class ProductsController {
     response.json(products);
   }
 
-  async create(request: Request, response: Response) {}
+  async create(request: Request, response: Response) {
+    const createdProduct = await this.productsRepository.create(
+      request.body as Partial<Product>,
+    );
+    response.status(201).json(createdProduct);
+  }
 }

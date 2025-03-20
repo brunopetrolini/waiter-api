@@ -1,11 +1,11 @@
 import fastify from 'fastify';
 import mongoose from 'mongoose';
 
-import { router } from './routes';
+import { categoriesRoutes } from './routes';
 
 const app = fastify({ logger: true });
 
-app.register(router, { prefix: '/api' });
+app.register(categoriesRoutes, { prefix: '/api' });
 
 const initServer = async () => {
   try {

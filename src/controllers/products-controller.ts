@@ -1,7 +1,8 @@
 import type { Request, Response } from 'express';
 
-import { Product } from '@/repositories/models';
 import { ProductsRepository } from '@/repositories/products-repository';
+
+import { createProductSchema } from './schemas/create-product-schema';
 
 export class ProductsController {
   private readonly productsRepository: ProductsRepository;
@@ -10,15 +11,19 @@ export class ProductsController {
     this.productsRepository = new ProductsRepository();
   }
 
-  async listAll(request: Request, response: Response) {
+  async listAll(_request: Request, response: Response) {
     const products = await this.productsRepository.findAll();
     response.json(products);
   }
 
   async create(request: Request, response: Response) {
-    const createdProduct = await this.productsRepository.create(
-      request.body as Partial<Product>,
-    );
+    const product = createProductSchema.parse(request.body);
+    const productWithImagePath = {
+      ...product,
+      imagePath: request.file?.filename,
+    };
+    const createdProduct =
+      await this.productsRepository.create(productWithImagePath);
     response.status(201).json(createdProduct);
   }
 }

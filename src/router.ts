@@ -7,7 +7,7 @@ import { CategoriesController, ProductsController } from './controllers';
 
 const router = Router();
 
-const uploadsDir = path.resolve(__dirname, '..', '..', './uploads');
+const uploadsDir = path.resolve(__dirname, '..', './uploads');
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
     cb(null, uploadsDir);

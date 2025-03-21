@@ -11,7 +11,9 @@ export const createProductSchema = z.object({
   }),
   ingredients: z
     .string()
+    .optional()
     .transform((value) => {
+      if (!value) return [];
       try {
         return JSON.parse(value);
       } catch {
@@ -19,12 +21,14 @@ export const createProductSchema = z.object({
       }
     })
     .pipe(
-      z.array(
-        z.object({
-          name: z.string(),
-          icon: z.string(),
-        }),
-      ),
+      z
+        .array(
+          z.object({
+            name: z.string(),
+            icon: z.string(),
+          }),
+        )
+        .default([]),
     ),
   category: z.string().transform((value) => new Types.ObjectId(value)),
 });

@@ -52,5 +52,8 @@ router.get('/orders', async (request, response) => {
 router.post('/orders', async (request, response) => {
   await ordersController.create(request, response);
 });
+router.patch('/orders/:id', async (request, response) => {
+  await ordersController.changeStatus(request, response);
+});
 
 export { router };

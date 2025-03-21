@@ -9,10 +9,16 @@ interface OrderProduct {
 
 export interface Order extends Document {
   table: string;
-  status: 'WAITING' | 'IN_PRODUCTION' | 'DONE';
+  status: OrderStatus;
   products: OrderProduct[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export enum OrderStatus {
+  WAITING = 'WAITING',
+  IN_PRODUCTION = 'IN_PRODUCTION',
+  DONE = 'DONE',
 }
 
 const orderSchema = new Schema(

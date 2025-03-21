@@ -1,4 +1,19 @@
-import { model, Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
+
+import { Product } from './product-model';
+
+interface OrderProduct {
+  product: Schema.Types.ObjectId | Product;
+  quantity: number;
+}
+
+export interface Order extends Document {
+  table: string;
+  status: 'WAITING' | 'IN_PRODUCTION' | 'DONE';
+  products: OrderProduct[];
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const orderSchema = new Schema(
   {
@@ -32,4 +47,4 @@ const orderSchema = new Schema(
   { timestamps: true },
 );
 
-export const Order = model('Order', orderSchema);
+export const OrderModel = model<Order>('Order', orderSchema);

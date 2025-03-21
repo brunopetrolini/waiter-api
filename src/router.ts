@@ -3,7 +3,11 @@ import path from 'node:path';
 import { Router } from 'express';
 import multer from 'multer';
 
-import { CategoriesController, ProductsController } from './controllers';
+import {
+  CategoriesController,
+  OrdersController,
+  ProductsController,
+} from './controllers';
 
 const router = Router();
 
@@ -21,23 +25,29 @@ const upload = multer({ storage: storage });
 
 /* Categories Routes */
 const categoriesController = new CategoriesController();
-router.get('/categories', (request, response) =>
-  categoriesController.findAll(request, response),
-);
-router.post('/categories', (request, response) =>
-  categoriesController.create(request, response),
-);
-router.get('/categories/:id/products', (request, response) =>
-  categoriesController.findCategoryProducts(request, response),
-);
+router.get('/categories', async (request, response) => {
+  await categoriesController.findAll(request, response);
+});
+router.post('/categories', async (request, response) => {
+  await categoriesController.create(request, response);
+});
+router.get('/categories/:id/products', async (request, response) => {
+  await categoriesController.findCategoryProducts(request, response);
+});
 
 /* Products Routes */
 const productsController = new ProductsController();
-router.get('/products', (request, response) =>
-  productsController.listAll(request, response),
-);
+router.get('/products', async (request, response) => {
+  await productsController.listAll(request, response);
+});
 router.post('/products', upload.single('image'), async (request, response) => {
   await productsController.create(request, response);
+});
+
+/* Orders Routes */
+const ordersController = new OrdersController();
+router.get('/orders', async (request, response) => {
+  await ordersController.listAll(request, response);
 });
 
 export { router };

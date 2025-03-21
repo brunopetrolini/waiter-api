@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 
+import { OrdersRepository } from '@/repositories';
 import { OrderStatus } from '@/repositories/models';
-import { OrdersRepository } from '@/repositories/orders-repository';
 
-import { createOrderSchema } from './schemas';
-import { changeOrderStatusSchema } from './schemas/change-order-status-schema';
+import { changeOrderStatusSchema, createOrderSchema } from './schemas';
 
 export class OrdersController {
   private readonly ordersRepository: OrdersRepository;

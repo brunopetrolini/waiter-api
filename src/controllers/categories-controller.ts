@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express';
 
-import { CategoriesRepository } from '@/repositories/categories-repository';
-import { ProductsRepository } from '@/repositories/products-repository';
+import { CategoriesRepository, ProductsRepository } from '@/repositories';
 
 import { createCategorySchema } from './schemas';
 

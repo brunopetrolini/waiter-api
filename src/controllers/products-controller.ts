@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 
-import { ProductsRepository } from '@/repositories/products-repository';
+import { ProductsRepository } from '@/repositories';
 
-import { createProductSchema } from './schemas/create-product-schema';
+import { createProductSchema } from './schemas';
 
 export class ProductsController {
   private readonly productsRepository: ProductsRepository;

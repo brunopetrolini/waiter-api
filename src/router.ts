@@ -36,8 +36,8 @@ const productsController = new ProductsController();
 router.get('/products', (request, response) =>
   productsController.listAll(request, response),
 );
-router.post('/products', upload.single('image'), (request, response) =>
-  productsController.create(request, response),
-);
+router.post('/products', upload.single('image'), async (request, response) => {
+  await productsController.create(request, response);
+});
 
 export { router };

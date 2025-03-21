@@ -12,6 +12,7 @@ export interface Product extends Document {
   description: string;
   price: number;
   ingredients: Ingredient[];
+  imagePath: string;
   category: Types.ObjectId | Category;
   createdAt: Date;
   updatedAt: Date;
@@ -53,6 +54,10 @@ const productSchema = new Schema<Product>(
       type: [ingredientSchema],
       required: true,
       default: [],
+    },
+    imagePath: {
+      type: String,
+      required: true,
     },
     category: {
       type: Schema.Types.ObjectId,

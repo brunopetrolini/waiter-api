@@ -17,6 +17,9 @@ export class ProductsController {
   }
 
   async create(request: Request, response: Response) {
+    if (!request.file) {
+      return response.status(400).json({ error: 'Product image is required' });
+    }
     const product = createProductSchema.parse(request.body);
     const productWithImagePath = {
       ...product,

@@ -4,6 +4,7 @@ import { OrdersRepository } from '@/repositories';
 import { OrderStatus } from '@/repositories/models';
 
 import { changeOrderStatusSchema, createOrderSchema } from './schemas';
+import { cancelOrderSchema } from './schemas/cancel-order-schema';
 
 export class OrdersController {
   private readonly ordersRepository: OrdersRepository;
@@ -29,6 +30,12 @@ export class OrdersController {
       params.id,
       OrderStatus[body.status],
     );
+    return response.sendStatus(204);
+  }
+
+  async cancel(request: Request, response: Response) {
+    const { id } = cancelOrderSchema.parse(request.params);
+    await this.ordersRepository.cancel(id);
     return response.sendStatus(204);
   }
 }

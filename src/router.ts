@@ -55,5 +55,8 @@ router.post('/orders', async (request, response) => {
 router.patch('/orders/:id', async (request, response) => {
   await ordersController.changeStatus(request, response);
 });
+router.delete('/orders/:id', async (request, response) => {
+  await ordersController.cancel(request, response);
+});
 
 export { router };

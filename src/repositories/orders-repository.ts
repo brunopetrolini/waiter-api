@@ -1,3 +1,5 @@
+import type { Types } from 'mongoose';
+
 import { Order, OrderModel, OrderStatus } from './models';
 
 export class OrdersRepository {
@@ -13,5 +15,9 @@ export class OrdersRepository {
 
   async changeStatus(id: string, status: OrderStatus): Promise<void> {
     await OrderModel.findByIdAndUpdate(id, { status });
+  }
+
+  async cancel(id: Types.ObjectId): Promise<void> {
+    await OrderModel.deleteOne(id);
   }
 }

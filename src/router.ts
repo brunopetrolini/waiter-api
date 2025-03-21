@@ -27,6 +27,9 @@ router.get('/categories', (request, response) =>
 router.post('/categories', (request, response) =>
   categoriesController.create(request, response),
 );
+router.get('/categories/:id/products', (request, response) =>
+  categoriesController.findCategoryProducts(request, response),
+);
 
 /* Products Routes */
 const productsController = new ProductsController();

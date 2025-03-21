@@ -1,9 +1,9 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, type Types } from 'mongoose';
 
 import { Product } from './product-model';
 
 interface OrderProduct {
-  product: Schema.Types.ObjectId | Product;
+  product: Types.ObjectId | Product;
   quantity: number;
 }
 

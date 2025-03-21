@@ -49,5 +49,8 @@ const ordersController = new OrdersController();
 router.get('/orders', async (request, response) => {
   await ordersController.listAll(request, response);
 });
+router.post('/orders', async (request, response) => {
+  await ordersController.create(request, response);
+});
 
 export { router };

@@ -9,7 +9,7 @@ import {
   ProductsController,
 } from './controllers';
 
-const router = Router();
+const router: Router = Router();
 
 const uploadsDir = path.resolve(__dirname, '..', './uploads');
 const storage = multer.diskStorage({

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 import { OrdersRepository } from '@/repositories';
 import { OrderStatus } from '@/repositories/models';
+import { io } from '@/server';
 
 import { changeOrderStatusSchema, createOrderSchema } from './schemas';
 import { cancelOrderSchema } from './schemas/cancel-order-schema';
@@ -21,6 +22,8 @@ export class OrdersController {
   async create(request: Request, response: Response) {
     const order = createOrderSchema.parse(request.body);
     const createdOrder = await this.ordersRepository.create(order);
+    const orderDetails = await createdOrder.populate('products.product');
+    io.emit('orders@new', orderDetails);
     return response.status(201).json(createdOrder);
   }
 
